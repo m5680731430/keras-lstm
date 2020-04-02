@@ -38,6 +38,9 @@ train_y, test_y = y[:Sp], y[Sp:] #前7维为X，后1维为Y
 model = creat_model(units=50, trainX=train_X, train_Y=train_y)
 model.fit(train_X, train_y, epochs=EPOCHS, batch_size=BATCH_SIZE, verbose=1) #verbose为0不显示过程，默认1显示过程，2间隔一段时间显示过程
 
+#模型保存
+model.save('easy_1-timestep_lstm.h5')
+
 #模型预测
 result = model.predict(test_X)
 
