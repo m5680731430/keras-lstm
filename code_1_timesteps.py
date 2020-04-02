@@ -22,7 +22,6 @@ def creat_model(units, trainX, train_Y):
 
 #读取数据
 data = pd.read_excel('../data/data2.xlsx', sheet_name=r'汇总数据2', usecols=range(1, 9)).values
-sp = int(0.8 * len(data))
 
 #数据归一化设置
 scaler = MinMaxScaler(feature_range=(0, 1), copy=False)
@@ -31,7 +30,7 @@ scaler = MinMaxScaler(feature_range=(0, 1), copy=False)
 Sp = int(0.8 * len(data)) #设置数据划分点
 X = data[:, :-1]
 y = data[:, -1]
-X = scaler.fit_transform(X) #仅对X作归一化操作
+X = scaler.fit_transform(X) #仅对X作归一化操作,全部归一化则需要逆归一化操作inverse_transform
 train_X, test_X = X[:Sp, :-1], X[Sp:, :-1] #前7维为X，后1维为Y
 train_y, test_y = y[:Sp], y[Sp:] #前7维为X，后1维为Y
 
