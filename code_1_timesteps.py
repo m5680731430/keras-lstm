@@ -5,6 +5,7 @@ from keras.models import Sequential,load_model #序列模型，加载模型
 from sklearn.metrics import mean_squared_error #评价指标
 import panda as pd #pandas方便读取和处理，但数据大之后速度较慢
 from matplotlib import pyplot as plt #最基本的绘图方法
+import numpy as np
 
 #定义网络基本参数
 UNITS = 50 #LSTM内神经元数量
@@ -34,12 +35,15 @@ X = scaler.fit_transform(X) #仅对X作归一化操作
 train_X, test_X = X[:Sp, :-1], X[Sp:, :-1] #前7维为X，后1维为Y
 train_y, test_y = y[:Sp], y[Sp:] #前7维为X，后1维为Y
 
+#模型加载（如果有现存模型）
+# model = load_model('1-timestep_easy_lstm.h5')
+
 #模型训练
 model = creat_model(units=50, trainX=train_X, train_Y=train_y)
 model.fit(train_X, train_y, epochs=EPOCHS, batch_size=BATCH_SIZE, verbose=1) #verbose为0不显示过程，默认1显示过程，2间隔一段时间显示过程
 
 #模型保存
-model.save('easy_1-timestep_lstm.h5')
+model.save('1-timestep_easy_lstm.h5')
 
 #模型预测
 result = model.predict(test_X)
